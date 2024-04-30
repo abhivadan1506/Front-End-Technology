@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Movie Ticket Booking</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="typescript.ts">
+</head>
+<body>
+  <div class="container">
+    <h1>Select Your Movies</h1>
+    <div class="movie-list">
+      <div class="movie">
+        <h2>Varisu</h2>
+        <img src="varisu4.png" alt="Varisu" height="200" width="">
+        <br><br><br><br>
+        <button class="book-btn" data-movie="Varisu">Book Now</button>
+      </div>
+      <div class="movie">
+        <h2>Thunivu</h2>
+        <img src="thunivu.jpg" alt="Thunivu" height="200">
+        <br><br><br><br>
+        <button class="book-btn" data-movie="Thunivu">Book Now</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="bookingModal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <form action="submit.php" method="post">
+      <h2>Booking for <span id="modal-movie"></span></h2>
+      <label for="theatreName">Theatre Name:</label>
+        <input type="text" id="theatreName" name="theatreName" placeholder="Enter theatre name" required>
+        <br>
+      <label for="dateSelect">Select Date:</label>
+      <input type="date" id="dateSelect" name="dateSelect"><br>
+      <label for="timeSelect">Select Time:</label>
+      <input type="time" id="timeSelect" name="selectedTime"><br>
+      <label for="ticketCount">Number of Tickets:</label>
+      <input type="number" id="ticketCount" name="ticketCount"><br>
+    
+      <button id="check">Confirm Booking</button>
+    </form>
+    </div>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> 
+  <script>
+    $(document).ready(function(){
+      $(".book-btn").click(function(){
+        var movie = $(this).data("movie");
+        $("#modal-movie").text(movie);
+        $("#bookingModal").show();
+      });
+
+      $(".close").click(function(){
+        $("#bookingModal").hide();
+      });
+
+      $("#confirmBooking").click(function(){
+        var selectedDate = $("#dateSelect").val();
+        var selectedTime = $("#timeSelect").val();
+        var numberOfTickets = $("#ticketCount").val();
+        if(selectedDate === "" || selectedTime === "" || numberOfTickets === ""){
+          alert("Please fill in all fields.");
+          return;
+        }
+        // Here you can perform AJAX request to your backend to process the booking
+        // For now, let's assume the booking is successful and show an alert
+        
+      });
+    });
+  </script>
+</body>
+</html>
